@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suroopa B — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FBF8F3;
+    --bg-soft: #F4EFE6;
+    --surface: #FFFFFF;
+    --sage: #BFD4BC;
+    --sage-deep: #94B190;
+    --blush: #EFCBBE;
+    --blush-deep: #DDA28D;
+    --lavender: #DAD3EE;
+    --lavender-deep: #B3A6DC;
+    --ink: #423D36;
+    --ink-soft: #6B6459;
+    --ink-faint: #9B9385;
+    --border: #E9E1D4;
+    --radius: 22px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(251,248,243,0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 32px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .logo-mark{
+    width: 14px; height:14px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, var(--sage-deep), var(--lavender-deep));
+    transform: rotate(20deg);
+  }
+  .nav-links{
+    display:flex;
+    gap: 34px;
+    font-size: 0.92rem;
+    font-weight:600;
+    color: var(--ink-soft);
+  }
+  .nav-links a{
+    position:relative;
+    padding-bottom: 4px;
+    transition: color .25s ease;
+  }
+  .nav-links a:hover{ color: var(--ink); }
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:-2px;
+    width:0; height:2px;
+    background: var(--blush-deep);
+    transition: width .25s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    background: var(--ink);
+    color: var(--bg);
+    padding: 9px 20px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight:700;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .nav-cta:hover{ transform: translateY(-2px); opacity:.88; }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding: 110px 32px 90px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    max-width: 1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: var(--sage-deep);
+    background: rgba(191,212,188,0.28);
+    padding: 7px 14px;
+    border-radius: 100px;
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background: var(--sage-deep);
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    line-height: 1.04;
+    margin-bottom: 18px;
+  }
+  .hero h1 em{
+    font-style: italic;
+    background: linear-gradient(100deg, var(--sage-deep), var(--lavender-deep) 60%, var(--blush-deep));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lede{
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 34px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom: 40px;}
+  .btn{
+    padding: 14px 26px;
+    border-radius: 100px;
+    font-weight:700;
+    font-size:0.92rem;
+    transition: all .25s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-primary{
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 14px 24px -10px rgba(66,61,54,0.35); }
+  .btn-ghost{
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .btn-ghost:hover{ border-color: var(--blush-deep); color: var(--blush-deep); }
+
+  .hero-meta{
+    display:flex;
+    gap: 28px;
+    flex-wrap:wrap;
+    font-size:0.86rem;
+    color: var(--ink-faint);
+  }
+  .hero-meta span{ display:flex; align-items:center; gap:7px; font-weight:600;}
+  .hero-meta svg{ width:15px; height:15px; opacity:.7;}
+
+  /* stacked-layers signature visual */
+  .stack-visual{
+    position:relative;
+    height: 420px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .layer{
+    position:absolute;
+    width: 300px;
+    height: 110px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 18px 40px -18px rgba(66,61,54,0.28);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding: 0 26px;
+    backdrop-filter: blur(2px);
+  }
+  .layer .tag{
+    font-size:0.68rem;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:.65;
+    margin-bottom:4px;
+  }
+  .layer .name{
+    font-family:'Fraunces',serif;
+    font-size:1.18rem;
+    font-weight:600;
+  }
+  .layer-frontend{
+    background: linear-gradient(135deg, #EFE6D9, var(--blush));
+    top: 14px; left: 4px;
+    transform: rotate(-7deg);
+    z-index:3;
+    animation: floatA 6s ease-in-out infinite;
+  }
+  .layer-backend{
+    background: linear-gradient(135deg, #E7F0E5, var(--sage));
+    top: 130px; right: 0px;
+    transform: rotate(4deg);
+    z-index:2;
+    animation: floatB 7s ease-in-out infinite;
+  }
+  .layer-database{
+    background: linear-gradient(135deg, #ECE7F7, var(--lavender));
+    top: 252px; left: 30px;
+    transform: rotate(-3deg);
+    z-index:1;
+    animation: floatC 6.5s ease-in-out infinite;
+  }
+  @keyframes floatA{ 0%,100%{ transform: rotate(-7deg) translateY(0);} 50%{ transform: rotate(-5deg) translateY(-10px);} }
+  @keyframes floatB{ 0%,100%{ transform: rotate(4deg) translateY(0);} 50%{ transform: rotate(6deg) translateY(-12px);} }
+  @keyframes floatC{ 0%,100%{ transform: rotate(-3deg) translateY(0);} 50%{ transform: rotate(-1deg) translateY(-8px);} }
+
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(60px);
+    opacity:0.55;
+    z-index:-1;
+  }
+  .blob1{ width:380px; height:380px; background: var(--sage); top:-120px; right:-100px;}
+  .blob2{ width:300px; height:300px; background: var(--blush); bottom:-100px; left:-80px;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{ padding: 100px 32px; }
+  .section.alt{ background: var(--bg-soft); }
+  .section-head{
+    text-align:center;
+    max-width: 620px;
+    margin: 0 auto 56px;
+  }
+  .section-head .eyebrow{ margin-bottom: 16px; }
+  .section-head h2{
+    font-size: clamp(2rem, 3.4vw, 2.6rem);
+    margin-bottom: 14px;
+  }
+  .section-head p{ color: var(--ink-soft); font-size: 1.02rem; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items:start;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .about-grid p{ color: var(--ink-soft); margin-bottom: 18px; font-size:1.02rem;}
+  .edu-card{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px;
+  }
+  .edu-card h3{ font-size:1.25rem; margin-bottom:6px;}
+  .edu-card .school{ color: var(--ink-soft); font-size:0.94rem; margin-bottom:18px;}
+  .edu-stats{ display:flex; gap:24px; flex-wrap:wrap; }
+  .edu-stats div{ text-align:left; }
+  .edu-stats .num{ font-family:'Fraunces',serif; font-size:1.5rem; font-weight:700; color: var(--sage-deep);}
+  .edu-stats .lbl{ font-size:0.78rem; color: var(--ink-faint); font-weight:600; text-transform:uppercase; letter-spacing:0.04em;}
+
+  .skill-block{ margin-top: 26px; }
+  .skill-block h4{
+    font-size: 0.78rem; text-transform:uppercase; letter-spacing:0.08em;
+    color: var(--ink-faint); margin-bottom: 12px; font-weight:700; font-family:'Plus Jakarta Sans',sans-serif;
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap: 9px; }
+  .chip{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.86rem;
+    font-weight:600;
+    color: var(--ink-soft);
+    transition: all .2s ease;
+  }
+  a.chip{ cursor:pointer; }
+  .chip:hover{ border-color: var(--sage-deep); color:var(--ink); transform: translateY(-2px); }
+
+  /* ---------- PROJECTS ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .project-card{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .project-card:hover{ transform: translateY(-6px); box-shadow: 0 24px 40px -22px rgba(66,61,54,0.25);}
+  .project-thumb{
+    height: 210px;
+    display:flex;
+    align-items:flex-end;
+    padding: 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .project-thumb h3{
+    color: var(--ink);
+    font-size: 1.4rem;
+    position:relative;
+    z-index:3;
+    text-shadow: 0 1px 14px rgba(255,255,255,0.6);
+  }
+  .thumb-1{ background: linear-gradient(135deg, var(--blush), #F6E2D6); }
+  .thumb-2{ background: linear-gradient(135deg, var(--sage), #E1EEDF); }
+  .thumb-3{ background: linear-gradient(135deg, var(--lavender), #ECE7F8); }
+  .project-thumb::after{
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 85% 15%, rgba(255,255,255,0.55), transparent 60%);
+    z-index:1;
+  }
+  .thumb-illo{
+    position:absolute;
+    top:0; left:0; width:100%; height:100%;
+    z-index:1;
+  }
+  .project-body{ padding: 22px 24px 26px; display:flex; flex-direction:column; gap:14px; flex:1;}
+  .project-body .ptype{
+    font-size:0.74rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color: var(--ink-faint);
+  }
+  .project-body ul{ display:flex; flex-direction:column; gap:7px; }
+  .project-body li{
+    font-size:0.88rem; color: var(--ink-soft);
+    padding-left: 16px; position:relative;
+  }
+  .project-body li::before{
+    content:''; position:absolute; left:0; top:8px;
+    width:5px; height:5px; border-radius:50%;
+    background: var(--blush-deep);
+  }
+  .tech-row{ display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; padding-top:10px;}
+  .tech-pill{
+    font-size:0.72rem; font-weight:700;
+    background: var(--bg-soft);
+    padding: 5px 11px;
+    border-radius: 100px;
+    color: var(--ink-soft);
+  }
+  .project-link{
+    display:flex; align-items:center; gap:6px;
+    font-size:0.85rem; font-weight:700; color: var(--sage-deep);
+    margin-top: 4px;
+    transition: gap .2s ease, color .2s ease;
+  }
+  .project-link:hover{ gap:10px; color: var(--blush-deep); }
+  .project-link svg{ width:14px; height:14px; }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ max-width: 760px; margin: 0 auto; position:relative; }
+  .timeline::before{
+    content:'';
+    position:absolute; left: 19px; top:10px; bottom:10px;
+    width:2px;
+    background: linear-gradient(var(--sage), var(--lavender), var(--blush));
+  }
+  .tl-item{ position:relative; padding-left: 60px; margin-bottom: 38px; }
+  .tl-item:last-child{ margin-bottom:0; }
+  .tl-dot{
+    position:absolute; left: 11px; top: 4px;
+    width: 18px; height:18px; border-radius:50%;
+    background: var(--surface);
+    border: 3px solid var(--sage-deep);
+  }
+  .tl-item:nth-child(2) .tl-dot{ border-color: var(--lavender-deep); }
+  .tl-item:nth-child(3) .tl-dot{ border-color: var(--blush-deep); }
+  .tl-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 26px;
+  }
+  .tl-card .role{ font-size:1.1rem; font-weight:700; font-family:'Fraunces',serif;}
+  .tl-card .org{ color: var(--ink-soft); font-size:0.92rem; margin-bottom:4px;}
+  .tl-card .when{ font-size:0.78rem; color: var(--ink-faint); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;}
+  .tl-card p{ font-size:0.9rem; color: var(--ink-soft); }
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .cert-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1180px;
+    margin:0 auto;
+  }
+  .cert-card{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .cert-card:hover{ transform: translateY(-4px); border-color: var(--sage-deep); }
+  .cert-icon{
+    width: 46px; height:46px;
+    border-radius: 13px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 18px;
+    font-size: 1.3rem;
+  }
+  .ci-1{ background: var(--blush); }
+  .ci-2{ background: var(--sage); }
+  .ci-3{ background: var(--lavender); }
+  .cert-card h4{ font-size:1.05rem; margin-bottom: 6px; }
+  .cert-card .issuer{ font-size:0.84rem; font-weight:700; color: var(--ink-faint); margin-bottom: 10px; }
+  .cert-card p{ font-size:0.86rem; color: var(--ink-soft); }
+
+  /* ---------- RESUME ---------- */
+  .resume-box{
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: 28px;
+    padding: 56px 60px;
+    text-align:center;
+  }
+  .resume-box h2{ font-size: clamp(1.8rem,3vw,2.3rem); margin-bottom:14px; position:relative; padding-bottom:18px;}
+  .resume-box h2::after{
+    content:'';
+    position:absolute; left:50%; bottom:0;
+    width: 54px; height:3px;
+    background: linear-gradient(90deg, var(--sage-deep), var(--lavender-deep));
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+  .resume-box p{ color: var(--ink-soft); max-width:520px; margin: 0 auto 30px; }
+  .resume-meta{
+    display:flex; gap:22px; flex-wrap:wrap; justify-content:center;
+    margin-bottom: 30px;
+  }
+  .resume-meta span{
+    font-size:0.82rem; font-weight:700; color: var(--ink-faint);
+    background: var(--bg-soft); padding: 7px 14px; border-radius:100px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 26px;
+    max-width: 1020px;
+    margin: 0 auto;
+  }
+  .contact-info-card, .contact-form-card{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+  }
+  .contact-info-card{ display:flex; flex-direction:column; gap:24px; }
+  .contact-info-card h3{ font-size:1.3rem; margin-bottom: 6px; }
+  .contact-info-card > p{ color: var(--ink-soft); font-size:0.94rem; }
+  .contact-detail{ display:flex; align-items:flex-start; gap:14px; }
+  .contact-detail .icon{
+    width:42px; height:42px; flex-shrink:0;
+    border-radius: 12px;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--bg-soft);
+    font-size: 1.1rem;
+  }
+  .contact-detail .lbl{ font-size:0.78rem; color: var(--ink-faint); font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:2px;}
+  .contact-detail .val{ font-weight:700; font-size:0.96rem; }
+  .find-online{ margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); }
+  .find-online h4{ font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em; color: var(--ink-faint); margin-bottom:14px; font-weight:700;}
+  .find-online .chip-row a{
+    flex:1;
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    text-align:center;
+  }
+
+  .contact-form-card h3{ font-size:1.3rem; margin-bottom: 22px; }
+  .form-row{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px; }
+  .form-group{ display:flex; flex-direction:column; gap:7px; }
+  .form-group.full{ margin-bottom:16px; }
+  .form-group label{ font-size:0.82rem; font-weight:700; color: var(--ink-soft); }
+  .form-group input, .form-group textarea{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 0.92rem;
+    color: var(--ink);
+    outline:none;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .form-group input:focus, .form-group textarea:focus{
+    border-color: var(--sage-deep);
+    background: var(--surface);
+  }
+  .form-group textarea{ resize: vertical; min-height: 110px; }
+  .form-submit{
+    width:100%;
+    border:none;
+    cursor:pointer;
+    background: linear-gradient(100deg, var(--sage-deep), var(--lavender-deep));
+    color: #fff;
+    padding: 14px 0;
+    border-radius: 100px;
+    font-weight:700;
+    font-size:0.94rem;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .form-submit:hover{ transform: translateY(-2px); box-shadow: 0 14px 24px -12px rgba(66,61,54,0.35); }
+
+  .contact-cta{
+    text-align:center;
+    max-width: 620px;
+    margin: 0 auto 44px;
+  }
+  .contact-cta h2{ font-size: clamp(1.8rem,3vw,2.4rem); margin-bottom:12px; }
+  .contact-cta p{ color: var(--ink-soft); }
+
+  @media (max-width: 760px){
+    .contact-grid{ grid-template-columns: 1fr; }
+    .form-row{ grid-template-columns: 1fr; }
+  }
+
+  footer{
+    text-align:center;
+    padding: 34px 32px;
+    color: var(--ink-faint);
+    font-size: 0.84rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.show{ opacity:1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .layer{ animation:none !important; }
+    .reveal{ transition:none; opacity:1; transform:none; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 920px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .stack-visual{ height: 320px; margin-top: 20px; }
+    .about-grid{ grid-template-columns: 1fr; gap: 36px; }
+    .project-grid{ grid-template-columns: 1fr 1fr; }
+    .cert-grid{ grid-template-columns: 1fr 1fr; }
+    .nav-links{ display:none; }
+  }
+  @media (max-width: 600px){
+    .project-grid{ grid-template-columns: 1fr; }
+    .cert-grid{ grid-template-columns: 1fr; }
+    .hero{ padding-top: 90px; }
+    .contact-box{ padding: 38px 26px; }
+    .section{ padding: 70px 22px; }
+    nav{ padding: 16px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="logo-mark"></span> Suroopa B</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#resume">Resume</a>
+    </div>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Open to opportunities</div>
+      <h1>Building software with <em>clarity</em>, end to end.</h1>
+      <p class="lede">Aspiring Software Engineer with strong foundations in Java, Spring Boot, React.js, and Full-Stack Development. Passionate about building scalable applications and AI-powered solutions that solve real-world problems.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">View my work →</a>
+        <a class="btn btn-ghost" href="Suroopa_B_Resume.pdf" download>↓ Resume</a>
+        <a class="btn btn-ghost" href="#contact">Let's talk</a>
+      </div>
+      <div class="hero-meta">
+        <span>📍 Coimbatore, Tamil Nadu, India</span>
+        <span>✉️ suroopa.bhagavathi@gmail.com</span>
+      </div>
+    </div>
+    <div class="stack-visual">
+      <div class="layer layer-frontend">
+        <div class="tag">Frontend</div>
+        <div class="name">React.js · HTML/CSS</div>
+      </div>
+      <div class="layer layer-backend">
+        <div class="tag">Backend</div>
+        <div class="name">Java · Spring Boot · Node.js</div>
+      </div>
+      <div class="layer layer-database">
+        <div class="tag">Database</div>
+        <div class="name">MySQL · REST APIs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="section-head reveal">
+    <div class="eyebrow" style="margin:0 auto 16px; width:fit-content;"><span class="dot"></span> About me</div>
+    <h2>A bit about my journey</h2>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <p>Aspiring software engineer with strong foundations in Java, Spring Boot, React.js, SQL, and full-stack development. I'm passionate about building scalable applications, solving real-world problems, and developing efficient solutions using modern technologies.</p>
+      <p>I'm committed to continuous learning and leveraging software engineering principles to create impactful, well-designed digital experiences — blending the "design" side of my degree with solid engineering practice.</p>
+      <div class="skill-block">
+        <h4>Languages</h4>
+        <div class="chip-row">
+          <span class="chip">Java</span><span class="chip">C++</span><span class="chip">JavaScript</span><span class="chip">SQL</span><span class="chip">HTML</span><span class="chip">CSS</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Frameworks &amp; Tools</h4>
+        <div class="chip-row">
+          <span class="chip">Spring Boot</span><span class="chip">React.js</span><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">MySQL</span><span class="chip">GitHub</span><span class="chip">Figma</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Concepts</h4>
+        <div class="chip-row">
+          <span class="chip">Data Structures &amp; Algorithms</span><span class="chip">OOP</span><span class="chip">REST API Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="edu-card">
+        <h3>B.E. Computer Science and Design</h3>
+        <p class="school">Sri Krishna College of Engineering and Technology, Coimbatore, Tamil Nadu</p>
+        <div class="edu-stats">
+          <div><div class="num">7.98</div><div class="lbl">CGPA / 10</div></div>
+          <div><div class="num">92%</div><div class="lbl">10th grade</div></div>
+          <div><div class="num">93%</div><div class="lbl">12th grade</div></div>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>Find me online</h4>
+        <div class="chip-row">
+          <a class="chip" href="https://www.linkedin.com/in/suroopa-b-68bb742a0/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="chip" href="https://github.com/Suroopa-058" target="_blank" rel="noopener">GitHub</a>
+          <a class="chip" href="https://leetcode.com/u/Suroopa_B/" target="_blank" rel="noopener">LeetCode</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="projects">
+  <div class="section-head reveal">
+    <div class="eyebrow" style="margin:0 auto 16px; width:fit-content;"><span class="dot"></span> Projects</div>
+    <h2>Things I've built</h2>
+    <p>A showcase of full-stack applications combining clean UI with solid backend engineering.</p>
+  </div>
+  <div class="project-grid">
+
+    <div class="project-card reveal">
+      <div class="project-thumb thumb-1">
+        <svg class="thumb-illo" viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="330" cy="55" r="46" fill="#fff" opacity="0.45"/>
+          <circle cx="290" cy="130" r="28" fill="#fff" opacity="0.35"/>
+          <g transform="translate(255,30)">
+            <rect x="0" y="20" width="58" height="70" rx="8" fill="#DDA28D"/>
+            <rect x="8" y="30" width="42" height="50" rx="4" fill="#FBF8F3"/>
+            <line x1="14" y1="42" x2="44" y2="42" stroke="#DDA28D" stroke-width="3"/>
+            <line x1="14" y1="52" x2="44" y2="52" stroke="#DDA28D" stroke-width="3"/>
+            <line x1="14" y1="62" x2="34" y2="62" stroke="#DDA28D" stroke-width="3"/>
+            <circle cx="29" cy="14" r="10" fill="#DDA28D"/>
+            <path d="M24 14 h10 M29 9 v10" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(330,118)">
+            <path d="M0 0 C0 -20 20 -20 20 0 C20 14 10 28 10 36 C10 28 0 14 0 0 Z" fill="#423D36" opacity="0.55"/>
+            <circle cx="10" cy="3" r="6" fill="#FBF8F3"/>
+          </g>
+        </svg>
+        <h3>MediMatch</h3>
+      </div>
+      <div class="project-body">
+        <div class="ptype">Smart Lab Locator · Full-Stack Web App</div>
+        <ul>
+          <li>Developed a healthcare platform for lab discovery and appointment booking</li>
+          <li>Built REST APIs and report analysis features</li>
+          <li>Integrated video consultation and AI capabilities</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-pill">React.js</span><span class="tech-pill">Node.js</span><span class="tech-pill">REST APIs</span><span class="tech-pill">MySQL</span><span class="tech-pill">WebRTC</span>
+        </div>
+        <a class="project-link" href="https://github.com/Suroopa-058" target="_blank" rel="noopener">GitHub · MediMatch ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-thumb thumb-2">
+        <svg class="thumb-illo" viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="320" cy="50" r="50" fill="#fff" opacity="0.4"/>
+          <circle cx="345" cy="135" r="26" fill="#fff" opacity="0.3"/>
+          <g transform="translate(270,18)">
+            <path d="M40 0 C62 0 80 16 80 36 L0 36 C0 16 18 0 40 0 Z" fill="#E8C77A"/>
+            <circle cx="22" cy="22" r="4" fill="#DDA28D"/>
+            <circle cx="40" cy="14" r="4" fill="#94B190"/>
+            <circle cx="58" cy="22" r="4" fill="#DDA28D"/>
+            <circle cx="32" cy="28" r="3" fill="#94B190"/>
+            <circle cx="50" cy="28" r="3" fill="#DDA28D"/>
+            <rect x="-4" y="36" width="88" height="6" rx="3" fill="#C8A24F"/>
+          </g>
+          <g transform="translate(305,120)">
+            <path d="M2 8 H44 L38 38 H10 Z" fill="none" stroke="#423D36" stroke-width="3" stroke-linejoin="round" opacity="0.6"/>
+            <line x1="0" y1="8" x2="2" y2="8" stroke="#423D36" stroke-width="3" opacity="0.6"/>
+            <circle cx="16" cy="44" r="3.5" fill="#423D36" opacity="0.6"/>
+            <circle cx="34" cy="44" r="3.5" fill="#423D36" opacity="0.6"/>
+          </g>
+        </svg>
+        <h3>EmberCrust</h3>
+      </div>
+      <div class="project-body">
+        <div class="ptype">Online Pizza Ordering · Full-Stack Web App</div>
+        <ul>
+          <li>Developed a full-stack pizza ordering platform with cart, checkout, and order management</li>
+          <li>Integrated Razorpay payments and MongoDB for secure transactions and data storage</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-pill">React.js</span><span class="tech-pill">Node.js</span><span class="tech-pill">MongoDB</span><span class="tech-pill">Razorpay</span>
+        </div>
+        <a class="project-link" href="https://github.com/Suroopa-058" target="_blank" rel="noopener">GitHub · EmberCrust ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-thumb thumb-3">
+        <svg class="thumb-illo" viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="325" cy="55" r="48" fill="#fff" opacity="0.4"/>
+          <circle cx="295" cy="135" r="24" fill="#fff" opacity="0.3"/>
+          <g transform="translate(270,25)">
+            <polygon points="40,0 80,20 40,40 0,20" fill="#C9BEEB"/>
+            <polygon points="0,20 40,40 40,80 0,60" fill="#B3A6DC"/>
+            <polygon points="80,20 40,40 40,80 80,60" fill="#9D8FCB"/>
+            <line x1="40" y1="40" x2="40" y2="80" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+          </g>
+          <g transform="translate(300,128)">
+            <rect x="0" y="6" width="36" height="24" rx="5" fill="#423D36" opacity="0.55"/>
+            <circle cx="18" cy="18" r="8" fill="#FBF8F3"/>
+            <circle cx="18" cy="18" r="3.5" fill="#423D36" opacity="0.55"/>
+            <rect x="6" y="0" width="10" height="6" rx="2" fill="#423D36" opacity="0.55"/>
+          </g>
+        </svg>
+        <h3>3D ArchViz</h3>
+      </div>
+      <div class="project-body">
+        <div class="ptype">3D Architectural Visualization Platform</div>
+        <ul>
+          <li>Built a 3D architectural visualization platform using React.js and Three.js</li>
+          <li>Implemented interactive walkthrough, camera controls, and smooth transitions</li>
+          <li>Designed responsive UI and managed dynamic project workflows</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-pill">React.js</span><span class="tech-pill">Three.js</span><span class="tech-pill">HTML5</span><span class="tech-pill">CSS3</span><span class="tech-pill">JavaScript</span>
+        </div>
+        <a class="project-link" href="https://github.com/Suroopa-058" target="_blank" rel="noopener">GitHub · 3D ArchViz ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="section-head reveal">
+    <div class="eyebrow" style="margin:0 auto 16px; width:fit-content;"><span class="dot"></span> Experience</div>
+    <h2>Internships</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="role">Infosys Springboard Internship 7.0</div>
+        <div class="org">Java Technology Stack</div>
+        <div class="when">June 2026 – July 2026</div>
+        <p>Strengthening core Java engineering skills as part of Infosys's structured internship program.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="role">Web Development &amp; Designing Intern</div>
+        <div class="org">Oasis Infobyte</div>
+        <div class="when">Internship</div>
+        <p>Developed web applications using modern technologies and worked on real-time project development and implementation.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="role">Web Development Intern</div>
+        <div class="org">Careeza Global Solutions</div>
+        <div class="when">Internship</div>
+        <p>Completed internship training in web development and contributed to application development and project workflows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="certifications">
+  <div class="section-head reveal">
+    <div class="eyebrow" style="margin:0 auto 16px; width:fit-content;"><span class="dot"></span> Certifications</div>
+    <h2>Certifications &amp; achievements</h2>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon ci-1">☁️</div>
+      <h4>AWS Cloud Practitioner Essentials</h4>
+      <div class="issuer">AWS Skill Builder</div>
+      <p>Foundational training in cloud computing concepts, services, and deployment strategies.</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon ci-2">🤖</div>
+      <h4>Artificial Intelligence for All</h4>
+      <div class="issuer">Infosys Springboard</div>
+      <p>Core concepts of AI and its real-world applications across industries.</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon ci-3">🧩</div>
+      <h4>Data Structures and Algorithms using Java</h4>
+      <div class="issuer">Infosys Springboard</div>
+      <p>Strengthened problem-solving fundamentals with DSA concepts implemented in Java.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="resume">
+  <div class="resume-box reveal">
+    <h2>Resume</h2>
+    <p>Aspiring Software Developer with hands-on experience in full-stack development, scalable web applications, and AI-powered solutions.</p>
+    <div class="resume-meta">
+      <span>Java · Spring Boot</span>
+      <span>React.js · Node.js</span>
+      <span>MySQL · REST APIs</span>
+    </div>
+    <a class="btn btn-primary" href="Suroopa_B_Resume.pdf" download>↓ Download Resume</a>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="contact-cta reveal">
+    <h2>Get in Touch</h2>
+    <p>Have an opportunity in mind? Let's work together.</p>
+  </div>
+  <div class="contact-grid reveal">
+    <div class="contact-info-card">
+      <div>
+        <h3>Let's Connect</h3>
+        <p>I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology and design.</p>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">✉️</div>
+        <div>
+          <div class="lbl">Email</div>
+          <div class="val">suroopa.bhagavathi@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">📞</div>
+        <div>
+          <div class="lbl">Phone</div>
+          <div class="val">7603967875</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">📍</div>
+        <div>
+          <div class="lbl">Location</div>
+          <div class="val">Coimbatore, Tamil Nadu, India</div>
+        </div>
+      </div>
+      <div class="find-online">
+        <h4>Find me on</h4>
+        <div class="chip-row">
+          <a class="chip" href="https://github.com/Suroopa-058" target="_blank" rel="noopener">GitHub</a>
+          <a class="chip" href="https://www.linkedin.com/in/suroopa-b-68bb742a0/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="chip" href="https://leetcode.com/u/Suroopa_B/" target="_blank" rel="noopener">LeetCode</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-card">
+      <h3>Send a Message</h3>
+      <form onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label for="cf-subject">Subject</label>
+          <input type="text" id="cf-subject" placeholder="What's this about?">
+        </div>
+        <div class="form-group full">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">✉️ Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Suroopa B. Designed &amp; built with care.
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('show');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
